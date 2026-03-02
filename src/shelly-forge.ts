@@ -3,9 +3,13 @@
 import { Command } from 'commander';
 import { loadCommandTools } from './load-commands.js';
 import { logger } from './utils/logger.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const packageJson = require('../package.json');
 
 const program = new Command();
-program.version('0.1.0');
+program.version(packageJson.version);
 
 async function main() {
     try {

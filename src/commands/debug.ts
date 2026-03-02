@@ -35,7 +35,7 @@ export default async function debug(mode: string, scriptName?: string): Promise<
             }
 
             logger.log(chalk.blue(`Setting debug ${mode} for script: ${scriptName}`));
-            const device = new ShellyDevice(script.scriptConfig.device);
+            const device = new ShellyDevice(script.scriptConfig.device, script.scriptConfig.password);
             await device.setDebug(debugEnabled);
             logger.log(chalk.green(`✨ Successfully set debug ${mode} for ${scriptName}`));
             return `Debug mode set to ${mode} for script ${scriptName}`;
@@ -55,7 +55,7 @@ export default async function debug(mode: string, scriptName?: string): Promise<
                 }
 
                 logger.log(chalk.blue(`Setting debug ${mode} for script: ${scriptName}`));
-                const device = new ShellyDevice(scriptConfig.device);
+                const device = new ShellyDevice(scriptConfig.device, scriptConfig.password);
                 await device.setDebug(debugEnabled);
                 configuredDevices.add(scriptConfig.device);
                 configuredScripts.push(scriptName);

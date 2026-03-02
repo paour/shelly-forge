@@ -53,7 +53,7 @@ export default async function deploy(scriptName?: string): Promise<string> {
 
             // Deploy to device
             logger.log(chalk.blue(`Deploying ${scriptName} to ${scriptConfig.device}...`));
-            const device = new ShellyDevice(scriptConfig.device);
+            const device = new ShellyDevice(scriptConfig.device, scriptConfig.password);
             await device.deploy(
                 scriptName,
                 code,

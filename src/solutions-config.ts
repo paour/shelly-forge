@@ -7,6 +7,8 @@ export interface ScriptConfig {
     src: string;
     device: string;
     enableOnBoot?: boolean;
+    /** Device password for digest authentication. Supports ${ENV_VAR} syntax. */
+    password?: string;
 }
 
 export interface SolutionConfig {
@@ -52,6 +54,7 @@ export class SolutionsConfig {
                 resolvedConfig[solutionName][scriptName] = {
                     ...scriptConfig,
                     device: scriptConfig.device ? this.resolveEnvVar(scriptConfig.device) : scriptConfig.device,
+                    password: scriptConfig.password ? this.resolveEnvVar(scriptConfig.password) : scriptConfig.password,
                 };
             }
         }
@@ -108,6 +111,7 @@ export class SolutionsConfig {
         this.config[solutionName][scriptName] = {
             ...scriptConfig,
             device: scriptConfig.device ? this.resolveEnvVar(scriptConfig.device) : scriptConfig.device,
+            password: scriptConfig.password ? this.resolveEnvVar(scriptConfig.password) : scriptConfig.password,
             enableOnBoot: scriptConfig.enableOnBoot ?? true,
         };
     }
